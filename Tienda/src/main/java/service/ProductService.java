@@ -20,14 +20,18 @@ public class ProductService {
 	
 	public static ArrayList<Producto> getAll(){
 		
-		return ProductoDAO.getAll();
+		return ProductoDAO.getAll("SELECT * FROM `producto`");
 	}
-	
+	public static ArrayList<Producto> getFiltradoCategoria(String categoria){
+		String query = "SELECT * FROM `producto` WHERE `categoria` = "+categoria;
+		System.out.println(query);
+		return ProductoDAO.getAll(query);
+	}
 	public static Producto findByName(String nombre) {
 		System.out.println("nombre:"+nombre);
 		for(Producto p:getAll()) {
 			if(p.getNombre().equals(nombre)) {
-				p.toString();
+				System.out.println("get by name"+ p.toString());
 				return p;
 			}
 		}

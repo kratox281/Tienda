@@ -7,20 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Producto;
 import service.ProductService;
 
 /**
- * Servlet implementation class DetalleController
+ * Servlet implementation class CategoriaController
  */
-@WebServlet("/prod")
-public class DetalleProductoController extends HttpServlet {
+@WebServlet("/cat")
+public class CategoriaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DetalleProductoController() {
+    public CategoriaController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,10 +29,7 @@ public class DetalleProductoController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Producto pro = ProductService.findByName(request.getParameter("nombre"));
-		System.out.println("controlador"+request.getParameter("nombre"));
-		request.setAttribute("productoDetalle", pro);
-		request.getRequestDispatcher("DetalleProd.jsp").forward(request, response);
+		request.getRequestDispatcher("Carrito.jsp").forward(request, response);
 	}
 
 	/**
@@ -41,6 +37,12 @@ public class DetalleProductoController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(request.getParameter("categoria").equals("categoria")) {
+			request.getSession().setAttribute("catalogo", ProductService.getAll());
+
+		}else {
+		request.getSession().setAttribute("catalogo", ProductService.getFiltradoCategoria(request.getParameter("categoria")));
+		}
 		doGet(request, response);
 	}
 

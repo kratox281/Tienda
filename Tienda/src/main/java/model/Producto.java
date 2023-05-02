@@ -5,18 +5,29 @@ import java.io.Serializable;
 import lombok.Data;
 @Data
 public class Producto implements Comparable<Producto>{
-	private int id;
-	private String nombre;
-	private String Descripcion;
-	private double precio;
-	private int stock;
+	private int id;//1
+	private String nombre;//2
+	private String descripcion;//3
+	private double precio;//4
+	private int stock;//6
+	private String url;//8
+	private int categoria;//9
 	public Producto(int id,String nombre, String descripcion, double precio,int stock) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		Descripcion = descripcion;
+		this.descripcion = descripcion;
 		this.precio = precio;
 		this.stock = stock;
+	}
+	public Producto(int id,String nombre, String descripcion, double precio,int stock,String url,int categoria) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.stock = stock;
+		this.url = url;
 	}
 	@Override
 	public int compareTo(Producto o) {

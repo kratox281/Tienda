@@ -1,4 +1,5 @@
-	<%@page import="model.Producto"%>
+	<%@page import="model.Categoria"%>
+<%@page import="model.Producto"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -120,26 +121,38 @@
 
 
 <body>
+	<%ArrayList<Producto>productos = (ArrayList<Producto>) session.getAttribute("catalogo");%>
+	<%ArrayList<Categoria>categorias = (ArrayList<Categoria>)session.getAttribute("categorias");%>
 	<%@include file="fragments/Header.jsp"%>
 	<!-- Llenar desde BDD -->
 	<div class="elementos">
-	<%ArrayList<Producto>productos = (ArrayList<Producto>) session.getAttribute("catalogo");
-%>
+
+	<form action="cat" method=post>
+	<select name = "categoria">
+	<option value="categoria">Categoria</option>
+	<%for(Categoria c:categorias){ %>
+	<option value=<%=c.getId() %>><%=c.getNombre() %></option>
+	<%} %>
+
+	</select>
+	<button type = "submit">Filtrar</button>
+	</form>
 	<%for(Producto producto:productos) {
 		System.out.print(producto.toString());
 	%>
-	
+	<%String url = "/Tienda/prod?nombre="+producto.getNombre(); %>
+
 	<div class="card">
-	<a href="/Tienda/prod">
-  <img src="https://www.gastronomiavasca.net/uploads/image/file/3390/manzana.jpg" alt="Imagen del producto">
+	<a href=<%=url%>>
+  <img src=<%=producto.getUrl() %> alt="Imagen del producto">
   </a>
   <div class="info">
-  
-    <h2><a href="/Tienda/prod"><%=producto.getNombre() %> </a></h2>
+  	
+    <h2><a href=<%=url %>><%=producto.getNombre() %> </a></h2>
    
-    <p><%=producto.getDescripcion() %></p>
+	<p><%=producto.getDescripcion() %></p>
     <p>Precio: $<%=producto.getPrecio() %></p>
-    <%if(producto.getStock()==0){  %>
+    <%if(producto.getStock()<=0){  %>
     <small style="color: red"> No hay stock de este articulo</small>
     <%} %> 
     <form action="CarritoController" method="post">
@@ -149,7 +162,7 @@
         <div class="quantity">
           <button type="button" class="minus-button" >-</button>
           
-          <input type="number" class="quantity-input" name="cantidad" value="0" min="0" max="<%=producto.getStock()%>">
+          <input type="number" class="quantity-input" name="cantidad" value="1" min="1" max="<%=producto.getStock()%>">
           
           <button id="boton+" type="button" class="plus-button">+</button>
         </div>

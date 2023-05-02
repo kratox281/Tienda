@@ -52,17 +52,19 @@ public class ProductoDAO {
 	}
 	
 	
-	public static ArrayList<Producto> getAll(){
+	public static ArrayList<Producto> getAll(String query){
 		if(!conectado) {
 			conectar();
 		}
-		 String query = "SELECT * FROM producto";
+		//String query filtrada SELECT * FROM `producto` WHERE `categoria` = 1
+		 
 		 ArrayList<Producto> productos = new ArrayList<>();
 		try {	
 		 ResultSet rs = st.executeQuery(query);
 		 while(rs.next()) {
 			 System.out.println("Stock:"+rs.getInt(5));
-			 productos.add(new Producto(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getInt(6)));
+			 System.out.println("");
+			 productos.add(new Producto(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getInt(6),rs.getString(8),rs.getInt(9)));
 		 }
 		}catch (Exception e) {
 			// TODO: handle exception

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.CategoryService;
 import service.ProductService;
 
 /**
@@ -36,8 +37,9 @@ public class ControladorBase extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println("Controlador base");
 		request.getSession().setAttribute("logged", "no");
+		request.getSession().setAttribute("categorias", CategoryService.getAll());
 		request.getSession().setAttribute("catalogo", ProductService.getAll());
-		System.out.println("Ha metido los productos en el request");
+		//System.out.println("Ha metido los productos en el request");
 		request.getRequestDispatcher("Carrito.jsp").forward(request, response);
 	}
 
