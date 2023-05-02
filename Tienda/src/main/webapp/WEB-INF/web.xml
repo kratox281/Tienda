@@ -1,0 +1,68 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>FiltroSesion</filter-name>
+  	<display-name>FiltroSesion</display-name>
+  	<description></description>
+  	<filter-class>com.filters.FiltroSesion</filter-class>
+  </filter>
+  <filter>
+  	<filter-name>FiltroCarrito</filter-name>
+  	<display-name>FiltroCarrito</display-name>
+  	<description></description>
+  	<filter-class>com.filters.FiltroCarrito</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>FiltroSesion</filter-name>
+  	<url-pattern>/FiltroSesion</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>FiltroCarrito</filter-name>
+  	<url-pattern>/FiltroCarrito</url-pattern>
+  </filter-mapping>
+  <servlet>
+  	<servlet-name>mensaje</servlet-name>
+  	<display-name>mensaje</display-name>
+  	<description></description>
+  	<servlet-class>controller.mensaje</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ControladorBase</servlet-name>
+  	<display-name>ControladorBase</display-name>
+  	<description></description>
+  	<servlet-class>controller.ControladorBase</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>PagoController</servlet-name>
+  	<display-name>PagoController</display-name>
+  	<description></description>
+  	<servlet-class>controller.PagoController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>DetalleController</servlet-name>
+  	<display-name>DetalleController</display-name>
+  	<description></description>
+  	<servlet-class>controller.DetalleController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>mensaje</servlet-name>
+  	<url-pattern>/mensaje</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ControladorBase</servlet-name>
+  	<url-pattern>/ControladorBase</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PagoController</servlet-name>
+  	<url-pattern>/PagoController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DetalleController</servlet-name>
+  	<url-pattern>/DetalleController</url-pattern>
+  </servlet-mapping>
+
+</web-app>
