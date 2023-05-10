@@ -29,7 +29,7 @@
       <input type="hidden" name="producto_id" value="<%=p.getNombre()%>">
       <input type="hidden" name="cantidad" value="1">
       <%if(p.getStock()>0){ %>
-        <button type="submit"  class="btn btn-lg btn-primary">Save changes</button>
+        <button type="submit"  class="btn btn-lg btn-primary">Añadir al Carrito</button>
         <%}else{ %>
         <small style="color: red"> No hay stock de este articulo</small>
         <% }%>

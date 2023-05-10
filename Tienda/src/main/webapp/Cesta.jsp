@@ -42,11 +42,21 @@
 } %>
 </table>
 <p>Total:<b><%=total %></b></p>
-<form action="pago" method="post"  style="text-align: center;">
+
+<div style="text-align: center;">
 <label>Seleccione su metodo de pago</label>
+<form action="pago" method="post">
+<input type="hidden" name="metodo" value="PayPal">
+<input type="hidden" name="total" value=<%=total %>>
 <button class="btn btn-success rounded-pill px-3" type="submit">PayPal</button>
+</form>
+<form action="pago" method="post" >
+<input type="hidden" name="metodo" value="Tarjeta">
+<input type="hidden" name="total" value=<%=total %>>
 <button class="btn btn-success rounded-pill px-3" type="submit">Tarjeta</button>
 </form>
+</div>
+
 <div class="relleno"></div>
 <%@include file="fragments/Footer.jsp"%>
 </body>

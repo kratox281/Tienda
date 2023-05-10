@@ -61,7 +61,7 @@ public class UsuarioDAO {
 		try {
 			ResultSet rs = st.executeQuery(query);
 			while(rs.next()) {
-				lista.add(new Usuario(rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
+				lista.add(new Usuario(rs.getInt(1),rs.getInt(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
 			}
 		} catch (Exception e) {
 		}
@@ -74,20 +74,38 @@ public class UsuarioDAO {
 		if (!conectado) {
 			conectar();
 		}
-//		if (user.equals("") || psswrd.equals("") || email.equals("") || nombre.equals("") || apellidos.equals("")) {
-//			throw new SQLException();
-//		}
+
 		PreparedStatement pst = conection.prepareStatement(
 				"INSERT INTO `usuario` (`id`, `rol_id`, `email`, `clave`, `nombre`, `apellidos`,`baja`) VALUES ("
 						+ contarUsers() + ",?,?,?,?,?,false);");
 		pst.setInt(1, 0);
 		pst.setString(2, u.getEmail());
 		pst.setString(3, u.getClave());
-		// pst.setString(4, user);
 		pst.setString(4, u.getNombre());
 		pst.setString(5, u.getApellidos());
 		pst.executeUpdate();
 		return true;
 
+	}
+	
+	public static void modificar(Usuario u) {
+		if (!conectado) {
+			conectar();
+		}
+		try {
+			PreparedStatement pst = conection.prepareStatement("UPDATE `usuario` SET `email` = ?, `clave` = ?, `nombre` = ?, `apellidos` = ? WHERE `usuario`.`id` = ? ");
+			//1mail 2 contra 3 nombre 4 apell 5 id
+			pst.setString(1, u.getEmail());
+			pst.setString(2, u.getClave());
+			pst.setString(3,u.getNombre());
+			pst.setString(4, u.getApellidos());
+			pst.setInt(5, u.getId());
+			pst.executeUpdate();
+			conection.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block 
+			e.printStackTrace();
+		}
+	
 	}
 }

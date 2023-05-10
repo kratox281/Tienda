@@ -1,3 +1,6 @@
+<%@page import="model.Pedido"%>
+<%@page import="model.Detalle"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -14,8 +17,18 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%ArrayList<Detalle> detalles = (ArrayList<Detalle>) request.getAttribute("detalles");
+  Pedido pedido = (Pedido) request.getAttribute("pedido");	
+%>
 	<%@include file="fragments/Header.jsp"%>
-	<h1>Esta es la ventana de Pago</h1>
+	<h1>Su pedido ha sido realizado con exito</h1>
+	<br><p>Detalles de su pedido</p>
+	<div style="text-align: center;">
+	<p><%=pedido.toString() %></p>
+	<%for(Detalle d:detalles){ %>
+	<p><%=d.toString() %></p>
+	<%} %>
+	</div>
 		<div class="relleno"></div>	
 	<%@include file="fragments/Footer.jsp"%>
 

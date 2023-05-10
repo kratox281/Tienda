@@ -40,7 +40,7 @@ public class LoginControlador extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+		//doPost(request, response);
 		//response.getWriter().append("Usuario: "+user+" contra: "+psswrd);
 		
 	}
@@ -73,9 +73,9 @@ public class LoginControlador extends HttpServlet {
 			request.getSession().setAttribute("logged", "si");
 			if(request.getSession().getAttribute("comprando")!=null) {
 				request.getSession().removeAttribute("comprando");
-				request.getRequestDispatcher("pago").forward(request, response);
+				request.getRequestDispatcher("Cesta.jsp").forward(request, response);
 			}else {
-				request.getRequestDispatcher("Respuesta.jsp").forward(request, response);
+				request.getRequestDispatcher("catalogo").forward(request, response);
 			}
 			
 			//doGet(request, response);

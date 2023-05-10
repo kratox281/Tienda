@@ -93,4 +93,11 @@ public class UserService {
 	public static ArrayList<Usuario> listaCompleta(){
 		return UsuarioDAO.findAll();
 	}
+	
+	
+	public static void modificar(Usuario u) throws Exception  {
+		u.setClave(encriptar(u.getClave()));
+		//System.out.println("Ha encriptado la clave");
+		UsuarioDAO.modificar(u);
+	}
 }

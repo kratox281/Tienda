@@ -1,10 +1,6 @@
 package controller;
 
-
-
 import java.io.IOException;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,19 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Usuario;
+import service.PedidoService;
 import service.UserService;
 
 /**
- * Servlet implementation class RegisterController
+ * Servlet implementation class PerfilControlador
  */
-@WebServlet("/register")
-public class RegisterController extends HttpServlet {
+@WebServlet("/perfil")
+public class PerfilControlador extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterController() {
+    public PerfilControlador() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,9 +31,10 @@ public class RegisterController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stu.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("/login").forward(request, response);
-
+		// TODO Auto-generated method stub
+		Usuario user = (Usuario)request.getSession().getAttribute("user"); 
+		request.setAttribute("pedidos", PedidoService.getByUser(user));
+		request.getRequestDispatcher("Perfil.jsp").forward(request, response);
 	}
 
 	/**
@@ -44,9 +42,7 @@ public class RegisterController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//request.getSession().setAttribute("error", "e");
-	
-		
+		Usuario user = (Usuario)request.getSession().getAttribute("user"); 
 		HttpSession sesion = request.getSession();
 		String psswrd = request.getParameter("contrasenia").equals(null)?"es nulo":request.getParameter("contrasenia");
 		String email = request.getParameter("email").equals(null)?"es nulo":request.getParameter("email");
@@ -55,25 +51,28 @@ public class RegisterController extends HttpServlet {
 		String apellidos = request.getParameter("apell").equals(null)?"es nulo":request.getParameter("apell");
 		String psswrd2 = request.getParameter("contrasenia").equals(null)?"es nulo":request.getParameter("contrasenia2");
 		if(!UserService.comprobarContrasenias(psswrd, psswrd2)) {
-			request.getSession().setAttribute("logged", "no"); 
+			System.out.println("error en la contraseña");
 			request.getSession().setAttribute("error", "error");
 			//cambiar
-			request.getRequestDispatcher("Registro.jsp").forward(request, response);
+			doGet(request, response);
 
 		}else {
 			try {
-			UserService.insertar(new Usuario(email,UserService.encriptar(psswrd),nombre,apellidos));
+				
+			//	System.out.println(user.toString());
+			UserService.modificar(new Usuario(user.getId(),0,email,psswrd,nombre,apellidos));
+			 user = UserService.comprobarUser(email, UserService.encriptar(psswrd));
+			 sesion.setAttribute("user", user);
 			request.getSession().removeAttribute("error");
-			request.getRequestDispatcher("Login.jsp").forward(request, response);
+			doGet(request, response);
 			}catch (Exception e) {
 				e.printStackTrace();
-				request.getSession().setAttribute("logged", "no"); 
+				
 				request.getSession().setAttribute("error", "error");
 				//cambiar
-				request.getRequestDispatcher("Registro.jsp").forward(request, response);
+				doGet(request, response);
 			}
-			
-		}
+	}
 	}
 
 }

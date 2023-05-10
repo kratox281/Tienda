@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.*;
 import java.io.*;
-@WebFilter(urlPatterns = {"/Respuesta.jsp","/Pago.jsp","/pago"})
+@WebFilter(urlPatterns = {"/Respuesta.jsp","/Pago.jsp","/pago","/Perfil.jsp"})
 public class FiltroSesion implements Filter {
     public void init(FilterConfig config) throws ServletException {
         // Aquí puedes hacer cualquier inicialización necesaria para el filtro.
