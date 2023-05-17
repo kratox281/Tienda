@@ -33,14 +33,15 @@ public class DetalleDAO {
 			conectar();
 		}
 		try {
-			PreparedStatement pst = conection.prepareStatement("INSERT INTO `detalle` (`id`, `pedido_id`, `producto_id`, `unidades`, `preciounidad`, `impuesto`, `total`) VALUES (?, ?, ?, ?, ?, ?, ?);");
+			PreparedStatement pst = conection.prepareStatement("INSERT INTO `detalle` (`id`, `pedido_id`, `producto_id`,`nombre_Producto`, `unidades`, `preciounidad`, `impuesto`, `total`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
 			pst.setInt(1, d.getId());
 			pst.setInt(2, d.getPedido_id());
 			pst.setInt(3, d.getProducto_id());
-			pst.setInt(4, d.getUnidades());
-			pst.setDouble(5, d.getPreciounidad());
-			pst.setDouble(6, d.getImpuesto());
-			pst.setDouble(7, d.getTotal());
+			pst.setString(4,d.getNombreProducto());
+			pst.setInt(5, d.getUnidades());
+			pst.setDouble(6, d.getPreciounidad());
+			pst.setDouble(7, d.getImpuesto());
+			pst.setDouble(8, d.getTotal());
 			
 			pst.executeUpdate();
 			conection.commit();
@@ -56,10 +57,11 @@ public class DetalleDAO {
 		}
 		ArrayList<Detalle>details = new ArrayList<>();
 		try {
-			PreparedStatement pst = conection.prepareStatement("");
+			PreparedStatement pst = conection.prepareStatement("SELECT * FROM `detalle` WHERE `pedido_id` = ? ");
+			pst.setInt(1, id);
 			ResultSet rs= pst.executeQuery();
 			while(rs.next()) {
-				details.add(new Detalle(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getDouble(5),rs.getDouble(6),rs.getDouble(7)));
+				details.add(new Detalle(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getInt(5),rs.getDouble(6),rs.getDouble(7),rs.getDouble(8)));
 			}
 			
 		} catch (SQLException e) {
@@ -78,7 +80,7 @@ public class DetalleDAO {
 			PreparedStatement pst = conection.prepareStatement("SELECT * FROM `detalle`");
 			ResultSet rs= pst.executeQuery();
 			while(rs.next()) {
-				details.add(new Detalle(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getDouble(5),rs.getDouble(6),rs.getDouble(7)));
+				details.add(new Detalle(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getInt(5),rs.getDouble(6),rs.getDouble(7),rs.getDouble(8)));
 			}
 			
 		} catch (SQLException e) {

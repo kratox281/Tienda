@@ -66,6 +66,12 @@
   	<description></description>
   	<servlet-class>controller.CatalogoController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>PedidoDetalladoController</servlet-name>
+  	<display-name>PedidoDetalladoController</display-name>
+  	<description></description>
+  	<servlet-class>controller.PedidoDetalladoController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>mensaje</servlet-name>
   	<url-pattern>/mensaje</url-pattern>
@@ -93,6 +99,10 @@
   <servlet-mapping>
   	<servlet-name>CatalogoController</servlet-name>
   	<url-pattern>/CatalogoController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PedidoDetalladoController</servlet-name>
+  	<url-pattern>/PedidoDetalladoController</url-pattern>
   </servlet-mapping>
 
 </web-app>

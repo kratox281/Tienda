@@ -39,7 +39,7 @@ public class ProductoDAO {
 			conectar();
 		}
 		try {
-			PreparedStatement pst = conection.prepareStatement("UPDATE `producto` SET  `stock` = ? WHERE `producto`.`id` = ?;");
+			PreparedStatement pst = conection.prepareStatement("UPDATE `producto` SET  `stock` = ? WHERE `id` = ?;");
 			pst.setInt(1, prod.getStock());
 			pst.setInt(2, prod.getId());
 			System.out.println(pst);

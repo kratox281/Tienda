@@ -11,6 +11,7 @@ public class Detalle {
 private int id;
 private int pedido_id;
 private int producto_id;
+private String nombreProducto;
 private int unidades;
 private double preciounidad;
 private double impuesto;

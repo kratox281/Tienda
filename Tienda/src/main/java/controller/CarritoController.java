@@ -44,7 +44,7 @@ public class CarritoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Map<Producto,Integer> cesta ;
-		
+		Producto clave = null;
 		if(request.getSession().getAttribute("cesta")==null) {
 			System.out.println("crea la cesta");
 			 cesta = new HashMap();
@@ -52,15 +52,25 @@ public class CarritoController extends HttpServlet {
 			System.out.println("La cesta está creada");
 			cesta = (Map<Producto, Integer>) request.getSession().getAttribute("cesta");
 		}
-		String nombre =  request.getParameter("producto_id");
+		String nombre =  request.getParameter("producto_nombre");
 		Producto producto = ProductService.findByName(nombre);
 		System.out.println(producto.toString());
 		int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 		System.out.println(cantidad);
 		ProductService.actualizarStock(nombre, cantidad);
-		if(cesta.containsKey(producto)) {
-			cantidad += cesta.get(producto);
-			cesta.remove(producto);
+		boolean existe = false;
+		for(Map.Entry<Producto, Integer>e:cesta.entrySet()) {
+			Producto temp = e.getKey();
+		if(temp.getNombre().equals(nombre)) {
+			System.out.println("si que existe");
+			existe =true;
+			clave = temp;
+		}
+		}
+		if(existe) {
+			System.out.println("lo modifica");
+			cantidad += cesta.get(clave);
+			cesta.remove(clave);
 			cesta.put(producto, cantidad);
 		}else {
 			cesta.put(producto, cantidad);

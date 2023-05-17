@@ -156,7 +156,7 @@
     <small style="color: red"> No hay stock de este articulo</small>
     <%}else{ %> 
     <form action="CarritoController" method="post">
-      <input type="hidden" name="producto_id" value="<%=producto.getNombre()%>">
+      <input type="hidden" name="producto_nombre" value="<%=producto.getNombre()%>">
       <div class="actions">
         <button type="submit" class="add-button">Añadir</button>
         <div class="quantity">

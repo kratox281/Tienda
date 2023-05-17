@@ -55,7 +55,8 @@ public class PagoController extends HttpServlet {
 		ArrayList<Detalle>details = new ArrayList();
 		for(Map.Entry<Producto, Integer> e: cesta.entrySet()) {
 			Producto pe = e.getKey();
-			Detalle d = new Detalle(DetalleService.count()+1,p.getId(),pe.getId(),e.getValue(),pe.getPrecio(),0,(pe.getPrecio()*e.getValue()));
+			Detalle d = new Detalle(DetalleService.count()+1,p.getId(),pe.getId(),pe.getNombre(),e.getValue(),pe.getPrecio(),0,(pe.getPrecio()*e.getValue()));
+			System.out.println(d.toString());
 			DetalleService.save(d);
 			details.add(d);
 		}

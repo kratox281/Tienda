@@ -53,7 +53,7 @@ public class PedidoDAO {
 		}
 		try {
 			System.out.println(p.toString());
-			PreparedStatement pst = conection.prepareStatement("INSERT INTO `pedido` (`id`, `usuario_id`, `fecha`, `metodopago`, `numfactura`, `total`,`estado`) VALUES (?, ?, ?, ?, ?, ?, ?) ");
+			PreparedStatement pst = conection.prepareStatement("INSERT INTO `pedido` (`id`, `usuario_id`, `fecha`, `metodo_pago`, `num_factura`, `total`,`estado`) VALUES (?, ?, ?, ?, ?, ?, ?) ");
 			pst.setInt(1, p.getId());
 			pst.setInt(2, p.getUsuario_id());
 			pst.setDate(3, p.getFecha());

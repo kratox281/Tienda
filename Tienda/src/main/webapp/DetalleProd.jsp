@@ -26,7 +26,7 @@
       <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
       <form action="CarritoController" method="post">
       <%System.out.print(p.getNombre()); %>
-      <input type="hidden" name="producto_id" value="<%=p.getNombre()%>">
+      <input type="hidden" name="producto_nombre" value="<%=p.getNombre()%>">
       <input type="hidden" name="cantidad" value="1">
       <%if(p.getStock()>0){ %>
         <button type="submit"  class="btn btn-lg btn-primary">Añadir al Carrito</button>
