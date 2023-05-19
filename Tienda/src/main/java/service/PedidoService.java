@@ -43,4 +43,10 @@ public class PedidoService {
 		return cont;
 	}
 	
+	
+	
+	public static void cancelar(int id) {
+		PedidoDAO.cancelar(id);
+	}
+	
 }

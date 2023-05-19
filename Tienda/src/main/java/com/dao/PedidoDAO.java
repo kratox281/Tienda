@@ -108,5 +108,20 @@ public class PedidoDAO {
 		return lista;
 
 	}
-
+	
+	public static void cancelar(int id) {
+		if (!conectado) {
+			conectar();
+		}
+		PreparedStatement pst;
+		try {
+			pst = conection.prepareStatement("UPDATE `pedido` SET `estado` = 'C' WHERE `id` = ? ");
+			pst.setInt(1, id);
+			pst.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

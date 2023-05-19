@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:insert="~{fragments/head}"></header>
+
+	<header>
+	<h1 style="text-align: center;margin-top: 2%">Categorias</h1>
+		<div style="text-align: right; margin-right: 2%; margin-top: 1%;">
+			<form action="createCategory" method="get">
+				<button class="btn btn-success"type="submit" value="Agregar">Agregar</button>
+			</form>
+		</div>
+	</header>
+	
+	<div class="row d-flex">
+	<div th:each="Categoria:${categorias}" class="col-12 col-sm-4" style="text-align: center" >
+	<div class="container py-5 align-content-center" tabindex="-1" role="dialog" id="modalSheet">
+  	<div class="modal-dialog" role="document">
+    <div class="modal-content rounded-4 shadow">
+		<h3 th:text="${Categoria.nombre}">Nombre Categoria</h3>
+
+		<form action="" method="get">
+			<input type="hidden" name="id" th:value="${Categoria.id}"> <button
+				class="btn btn-warning" type="submit" value="Editar" formaction="editCategory"> Editar</button>
+				<button class="btn btn-danger" onclick="if(!confirm('¿Desea retirar esta categoria?')){return false;}"
+				type="submit" value="Eliminar" formaction="deleteCat">Eliminar</button>
+
+		</form>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+	<footer th:insert="~{fragments/footer}" style="margin-top: 20%;"></footer>
+</body>
+</html>
